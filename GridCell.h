@@ -3,6 +3,7 @@
 
 #include "NavalUnit.h"
 
+//classe memorizza e aggiorna stato delle celle della griglia
 class GridCell
 {
 private:
@@ -17,7 +18,7 @@ public:
 	void setMiss() {isMiss = true; isHit = false;}
 	void setSonar() {isSonar = true;}
 	void resetSonar() {isSonar = false;}
-	void setUnit(NavalUnit *p, bool hit) {this -> p = p; isHit=hit;}
+	void setUnit(NavalUnit *p, bool hit) {this->p = p; isHit = hit;}
 	
 	void clear();	//reset tutti valori
 	char getSymbol();

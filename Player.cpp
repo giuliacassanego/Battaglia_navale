@@ -16,26 +16,6 @@ Player::Player(string n)
     win = false;
 }
 
-Grid& Player::getGrid()
-{
-    return grid;
-}
-
-void Player::hasHit()
-{
-    hits++;
-}
-
-int Player::getHits()
-{
-    return hits;
-}
-
-void Player::hasWin()
-{
-    win = true;
-}
-
 NavalUnit* Player::addUnit(NavalUnitType type, string name)	//piazza unità, specifico per human chiede dove
 {
 	NavalUnit* entry;
@@ -78,17 +58,21 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 	switch(action.getType())
 	{
 		case UNIT_ACTION:
+		{
 			NavalUnit *unit = findUnit(action.getSource());
 			if(unit == nullptr)
 			{
-				throw illegal_argument("Invalid source");
+				throw invalid_argument("Invalid source");
 			}
 			unit->action(action.getTarget());
 			break;
+		}
 		case CLEAR:
 			getGrid().deleteSonar();
 			break;
 		case SHOW:
+			break;
+		default:
 			break;
 	}
 }
@@ -111,6 +95,23 @@ bool Player::checkHit(Coordinates pos)
 bool Player::hitOpponent(Coordinates target)
 {
 	return opponent->checkHit(target);
+}
+
+vector<Coordinates> Player::scan(Coordinates center)
+{
+	vector<Coordinates> positions;
+	for(int i = (center.getX()-2); i < (center.getX()+2); i++)
+	{
+		for(int j = (center.getY()-2); j < (center.getY()+2); j++)
+		{
+			GridCell& cell = opponent->getGrid().getDefense(Coordinates(i, j));
+			if(!(cell.isVoid()))
+			{
+				positions.push_back(Coordinates(i,j));
+			}
+		}
+	}
+	return positions;
 }
 
 /*

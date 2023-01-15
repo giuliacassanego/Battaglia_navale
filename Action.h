@@ -13,9 +13,10 @@ enum ActionType
 class Action
 {
 private:
+	ActionType type;
 	Coordinates source;
 	Coordinates target;
-	ActionType type;
+	
 	
 public:
 	Action(ActionType type) : type(type) {}

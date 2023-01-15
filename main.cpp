@@ -62,18 +62,24 @@ int main(void)
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();	
 	
+	submarine1->action(Coordinates(4,3));
+	cout << "print grid1" << endl;
+	cout << player1.getGrid();
+	cout << "print grid2" << endl;
+	cout << player2.getGrid();	
+	
 	return 0;
 	}
 	catch(exception e)
 	{
 		cout << e.what() << endl;
 	}
-	//Gameplay
+/*	//Gameplay
 	Player* active = &player1;
 	while (true) {
 		active->action(action);
 		// check if win
 		active = (active == &player1 ? &player2 : &player1);
 	}
-	
+	*/
 }

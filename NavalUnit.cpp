@@ -87,7 +87,7 @@ void NavalUnit::hit(Coordinates target)
 	{
 		if(positions[i] == target)
 		{
-			if(!hitState[i])
+			if(!hitState[i])	//non era già stato colpito
 			{
 				shield--;
 			}

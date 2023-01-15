@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Coordinates.h"
-class Player;
+class Player;	//forward reference to avoid recursive inclusion
 
 
 using namespace std;
