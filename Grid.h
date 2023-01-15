@@ -4,25 +4,26 @@
 #define GRID_H
 
 #include <iostream>
+
+#include "GridCell.h"
+
 using namespace std;
 
 class Grid
 {
 private:
-	string defense[12][12];
-	string attack[12][12];
+	GridCell defense[12][12];
+	GridCell attack[12][12];
 
 public:
-	Grid();
-	string getDefense(Coordinates pos);
-	string getAttack(Coordinates pos);
-	void setDefense(Coordinates pos, char c);
-	void setAttack(Coordinates, char c);
+	Grid() {}
+	GridCell& getDefense(Coordinates pos);
+	GridCell& getAttack(Coordinates pos);
 	
 	bool isFree(Coordinates pos);	
 	bool verifyIsFree(vector<Coordinates> coords);
-	void insert(NavalUnit unit);
-	void clear();
+	void insert(NavalUnit *unit);
+	void clear(NavalUnit *unit);
 	void deleteSonar();
 };
 

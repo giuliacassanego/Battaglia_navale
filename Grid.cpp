@@ -10,59 +10,21 @@
 
 using namespace std;
 
-Grid::Grid()
-{
-	//all'inizio tutti spazi
-	for(int i = 0; i < 12; i++)
-	{
-		for(int j = 0; j < 12; j++)
-		{
-			defense[i][j] = ' ';
-			attack[i][j] = ' ';
-		}
-	}
-}
-
-string Grid::getDefense(Coordinates pos)
+GridCell& Grid::getDefense(Coordinates pos)
 {
 	return defense[pos.getX()][pos.getY()];
 }
 
-string Grid::getAttack(Coordinates pos)
+GridCell& Grid::getAttack(Coordinates pos)
 {
 	return attack[pos.getX()][pos.getY()];
-}
-
-void Grid::setDefense(Coordinates pos, char c)
-{
-	if (c != 'C' && c != 'E' && c != 'S')	
-	{
-		throw invalid_argument("error: Invalid letter entered"); 
-	}
-	defense[pos.getX()][pos.getY()] = c;
-}
-
-void Grid::setAttack(Coordinates pos, char c)
-{
-	if (c != 'O' && c != 'X' && c != 'Y')	
-	{
-		throw invalid_argument("error: Invalid letter entered"); 
-	}
-	attack[pos.getX()][pos.getY()] = c;
-}
-
-bool Grid::isFree(Coordinates pos)
-{
-	if(getDefense(pos) == " ")
-		return true;
-	return false;
 }
 
 bool Grid::verifyIsFree(vector<Coordinates> coords)
 {
 	for(int i = 0; i < coords.size(); i ++)
 	{
-		if(!isFree(coords[i]))
+		if(!getDefense(coords[i]).isVoid())
 		{
 			return false;
 		}
@@ -70,80 +32,89 @@ bool Grid::verifyIsFree(vector<Coordinates> coords)
 	return true;
 }
 
-void Grid::insert(NavalUnit unit)	//bow=prua, stern=poppa
+void Grid::insert(NavalUnit *unit)
 {
-	vector<Coordinates> coords = unit.getGridPosition();
-	for (int i = 0; i < coords.size(); i++)
+	vector<Coordinates> coords = unit -> getGridPositions();
+	if(!verifyIsFree(coords))
 	{
-		if(!isFree(coords[i]))
-		{
-			throw invalid_argument("Position already occupied");
-		}
+		throw invalid_argument("Position already occupied");
 	}
 	for (int i = 0; i < coords.size(); i++)
 	{
-		setDefense(coords[i], unit.getSymbol());
+		getDefense(coords[i]).setUnit(unit, unit->isHit(i));
 	}
 }
 
-void Grid::clear(NavalUnit unit)
+void Grid::clear(NavalUnit *unit)
 {
-	vector<Coordinates> coords = unit.getGridPosition();
+	vector<Coordinates> coords = unit -> getGridPositions();
 	for (int i = 0; i < coords.size(); i++)
 	{
-		setDefense(coords[i], ' ');
+		getDefense(coords[i]).clear();
 	}
 }
 
 void Grid::deleteSonar()	//cerco Y e riporto a carattere iniziale
 {
-	for(int i = 1; i < 13; i++)
+	for(int i = 0; i < 12; i++)
 	{
 		for(int j = 0; j < 12; j++)
 		{
-			if(attack[i][j] == "Y")
-			{
-				attack[i][j] = "Y";
-			}
+			getAttack(Coordinates(i, j)).resetSonar();
 		}
 	}
 }
 
 ostream& operator<< (ostream& os, Grid grid)
 {
-	os << endl << "Griglia di difesa" << endl;
+	os << endl << "Griglia di difesa                                         Griglia di attacco" << endl;
 	//griglia difesa
 	for (int j = 0; j < 12; j++)
 	{
-		os << Coordinates::to_y(j) << " | ";
+		os << Coordinates::toY(j) << " | ";
 		for (int i = 0; i < 12; i++)
 		{
-			os << grid.getDefense(i, j) << " | ";
+			os << grid.getDefense(Coordinates(i, j)).getSymbol() << " | ";
 		}
-		os << endl;	// << "-------------";
+		
+		cout << "      ";
+		os << Coordinates::toY(j) << " | ";
+		for (int i = 0; i < 12; i++)
+		{
+			os << grid.getAttack(Coordinates(i, j)).getSymbol() << " | ";
+		}
+		os << endl;
 	}
+	
 	os << "  | ";
 	for (int i = 0; i < 12; i++)	//stampo ultima riga, solo numeri senza |
 	{
-		os << Coordinates::to_x(i) << " ";
+		os << Coordinates::toX(i) << " ";
 	}
+	cout << "      ";
+	os << "  | ";
+	for (int i = 0; i < 12; i++)	//stampo ultima riga, solo numeri senza |
+	{
+		os << Coordinates::toX(i) << " ";
+	}
+/*
 	os << endl << endl << "Griglia di attacco" << endl;
 	
 	//griglia attacco
 	for (int j = 0; j < 12; j++)
 	{
-		os << Coordinates::to_y(j) << " | ";
+		os << Coordinates::toY(j) << " | ";
 		for (int i = 0; i < 12; i++)
 		{
-			os << grid.getAttack(i, j) << " | ";
+			os << grid.getAttack(Coordinates(i, j)).getSymbol() << " | ";
 		}
-		os << endl;	// << "-------------";
+		os << endl;
 	}
 	os << "  | ";
 	for (int i = 0; i < 12; i++)	//stampo ultima riga, solo numeri senza |
 	{
-		os << Coordinates::to_x(i) << " ";
+		os << Coordinates::toX(i) << " ";
 	}
-	
+*/	
 	return os << endl;
 }

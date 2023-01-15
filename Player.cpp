@@ -4,27 +4,19 @@
 
 #include "Player.h"
 #include "Grid.h"
-//#include "Corazzata.h"
-//#include "NaveSupporto.h"
-//#include "SottoMarino.h"
+#include "BattleShip.h"
+#include "SupportVessel.h"
+#include "Submarine.h"
 
 using namespace std;
 
-Player::Player(string n):
-corazzata1("corazzata1", this),
-corazzata2("corazzata2", this),
-corazzata3("corazzata3", this),
-nave1("nave1", this),
-nave2("nave2", this),
-nave3("nave3", this),
-sottomarino1("sottomarino1", this),
-sottomarino2("sottomarino2", this),
+Player::Player(string n)
 {
     hits=0; 
     win = false;
 }
 
-Grid Player::getGrid()
+Grid& Player::getGrid()
 {
     return grid;
 }
@@ -44,42 +36,86 @@ void Player::hasWin()
     win = true;
 }
 
-Corazzata Player::getCor1()
+NavalUnit* Player::addUnit(NavalUnitType type, string name)	//piazza unità, specifico per human chiede dove
 {
-	return corazzata1;
+	NavalUnit* entry;
+	switch(type)
+	{
+		case BATTLESHIP:
+			entry = new BattleShip(name, this);
+			break;
+		case SUPPORTVESSEL:
+			entry = new SupportVessel(name, this);
+			break;
+		case SUBMARINE:
+			entry = new Submarine(name, this);
+			break;
+	}
+	units.push_back(entry);
+	return entry;
 }
 
-Corazzata Player::getCor2()
+void Player::setUnitPosition(NavalUnit* unit, Coordinates bow, Coordinates stern)
 {
-	return corazzata2;
+	unit->setPosition(bow, stern);
+	grid.insert(unit);
 }
 
-Corazzata Player::getCor3()
+NavalUnit* Player::findUnit(Coordinates center)
 {
-	return corazzata3;
+	for(int i = 0; i < units.size(); i++)
+	{
+		if(units[i]->getCenter() == center)
+		{
+			return units[i];
+		}
+	}
+	return nullptr;
 }
 
-NaveSupporto Player::getNave1()
+void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 {
-	return nave1;
+	switch(action.getType())
+	{
+		case UNIT_ACTION:
+			NavalUnit *unit = findUnit(action.getSource());
+			if(unit == nullptr)
+			{
+				throw illegal_argument("Invalid source");
+			}
+			unit->action(action.getTarget());
+			break;
+		case CLEAR:
+			getGrid().deleteSonar();
+			break;
+		case SHOW:
+			break;
+	}
 }
 
-NaveSupporto Player::getNave2()
+bool Player::checkHit(Coordinates pos)
 {
-	return nave2;
+	GridCell& cell = getGrid().getDefense(pos);
+	if(cell.isVoid())
+	{
+		return false;
+	}
+	cell.getUnit()->hit(pos);
+	if(cell.getUnit()->isSunk())
+	{
+		getGrid().clear(cell.getUnit());
+	}
+	return true;
 }
 
-NaveSupporto Player::getNave3()
+bool Player::hitOpponent(Coordinates target)
 {
-	return nave3;
+	return opponent->checkHit(target);
 }
 
-Sottomarino Player::getSub1()
-{
-	return sottomarino1;
-}
-
-Sottomarino Player::getSub2()
-{
-	return sottomarino2;
-}
+/*
+	
+	
+	
+	bool Player::checkHit(Coordinates pos);//aggiorna shield
+	int Player::getTotalShield();*/

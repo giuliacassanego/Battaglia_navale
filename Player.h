@@ -4,51 +4,42 @@
 #define PLAYER_H
 #include <iostream>
 #include "Grid.h"
+#include "NavalUnit.h"
+#include "Action.h"
 
 using namespace std;
 
 class Player
 {
-private:
+protected:
     int hits; //numero dei colpi andati a segno
     bool win;
-	Corazzata corazzata1;
-    Corazzata corazzata2;
-    Corazzata corazzata3;
-    
-    NaveSupporto nave1;
-    NaveSupporto nave2;
-    NaveSupporto nave3;
-    
-    Sottomarino sottomarino1;
-    Sottomarino sottomarino2;
+	vector<NavalUnit*> units;
 	
-	Player &opponent;
+	Player *opponent;
 	Grid grid;
 
 public:
 	Player(string n);
 	
-	//member functions
-	void init();	//piazza unità, specifico per human chiede dove
-	void play();	//fa prossima mossa, chiama move,fire,ecc
-	void move(NavalUnit unit, Coordinates target);	//usata in play
+	NavalUnit* addUnit(NavalUnitType type, string name); //piazza unità, specifico per human chiede dove
+	void setUnitPosition(NavalUnit* unit, Coordinates bow, Coordinates stern);
+	NavalUnit* findUnit(Coordinates center);
+	virtual Action nextAction() = 0;	//human chiede, computer random
+	void play(Action action);	//fa prossima mossa, chiama move,fire,ecc
+	void move(NavalUnit* unit, Coordinates target);	//usata in play
 	
 	bool checkHit(Coordinates pos);//aggiorna shield
-	bool getTotalShield();//tutti shield a zero=perso
+	int getTotalShield();//tutti shield a zero=perso
 	
 	
     void hasHit();
     int getHits();
     void hasWin();
-	Grid getGrid();
-	Corazzata getCor1();
-	Corazzata getCor2();
-	Corazzata getCor3();
-	NaveSupporto getNave1();
-	NaveSupporto getNave2();
-	NaveSupporto getNave3();
-	Sottomarino getSub1();
+	Grid& getGrid();
+	
+	bool hitOpponent(Coordinates target);
+	void setOpponent(Player *opp) {opponent = opp;}
 };
 
 #endif

@@ -14,6 +14,7 @@ int x;
 int y;
 	
 public:
+	Coordinates() : x(-1), y(-1) {}
 	Coordinates(string s);
 	Coordinates(int x, int y);
 	
@@ -22,6 +23,8 @@ public:
 	
 	static string toY(int n);
 	static string toX(int n);
+	
+	bool operator==(Coordinates& other) {return other.getX()==getX() && other.getY()==getY();}
 };
 
 
