@@ -9,7 +9,7 @@ Coordinates::Coordinates(string s)
 	{
 		y -= 2;
 	}
-	x = stoi(s.substr(1));
+	x = stoi(s.substr(1)) - 1;
 	
 	//checks
 	if (!isValid())

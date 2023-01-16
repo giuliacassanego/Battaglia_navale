@@ -10,10 +10,10 @@
 
 using namespace std;
 
-Player::Player(string n)
+Player::Player(string name)
 {
-	this.n = n;
-    hits=0; 
+	n = name;
+    hits = 0; 
     win = false;
 }
 

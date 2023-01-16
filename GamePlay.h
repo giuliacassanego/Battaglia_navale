@@ -19,7 +19,8 @@ private:
 public:
 	GamePlay(PlayMode mode) : mode(mode) {}
 	
-	Player playGame();
+	void playGame();
+	void activePlayer(Player p1, Player p2);
 };
 
 #endif

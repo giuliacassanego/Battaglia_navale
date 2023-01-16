@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 void BattleShip::action(Coordinates target)
 {
 	cout << "Battleshp action" << endl;

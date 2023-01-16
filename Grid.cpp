@@ -34,7 +34,7 @@ bool Grid::verifyIsFree(vector<Coordinates> coords)
 
 void Grid::insert(NavalUnit *unit)
 {
-	vector<Coordinates> coords = unit -> getGridPositions();
+	vector<Coordinates> coords = unit->getGridPositions();
 	if(!verifyIsFree(coords))
 	{
 		throw invalid_argument("Position already occupied");

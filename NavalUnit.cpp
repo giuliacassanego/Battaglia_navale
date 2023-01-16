@@ -19,8 +19,7 @@ void NavalUnit::setPosition(Coordinates bow, Coordinates stern)
 	{
 		if(abs(stern.getY() - bow.getY()) != (size - 1))
 		{
-			cout << "Invalid size Y" << endl;
-			throw invalid_argument("error: Invalid size");
+			throw invalid_argument("error: Invalid size Y");
 		}
 		vertical = true;
 		center = Coordinates(bow.getX(), (bow.getY() + stern.getY())/2);
@@ -29,15 +28,13 @@ void NavalUnit::setPosition(Coordinates bow, Coordinates stern)
 	{
 		if(abs(stern.getX() - bow.getX()) != (size - 1))
 		{
-			cout << "Invalid size X" << endl;
-			throw invalid_argument("error: Invalid size");
+			throw invalid_argument("error: Invalid size X");
 		}
 		vertical = false;
 		center = Coordinates((bow.getX() + stern.getX())/2, bow.getY());
 	}
 	else
 	{
-		cout << "Invalid position" << endl;
 		throw invalid_argument("error: Invalid position");
 	}
 }

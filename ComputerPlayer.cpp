@@ -9,20 +9,16 @@ Action ComputerPlayer::nextAction()
 {
     Action a;
     srand(time(NULL));
-    int n = rand()%3+1;
+    int n = rand()%2+1;
     
-    if(n==1) //eseguo comando XX XX
-    {
-        a = Action(SHOW);
-    }
-    else if(n==2) //eseguo comando AA AA
+    if(n==1) //eseguo comando AA AA
     {
         a = Action(CLEAR);
     }
     else{
         int unitMakeAction = rand()%(units.size()) +1;  //uso il this?? come lo vogliamo richiamare?
         Coordinates source(units[unitMakeAction]->getCenter());
-        a = Action(source, randomChosePos());
+		a = Action(source, randomChosePos());
     }
     return a;
 }
@@ -72,7 +68,7 @@ Coordinates ComputerPlayer::findStern(NavalUnit* n, Coordinates bow) //metodo pe
 
 void ComputerPlayer::prepareGrid()
 {
-    cout << "Player1 is setting his Navalunits" <<endl;
+    cout << getName() << " is setting his Navalunits" <<endl;
     
     bool correct = false;
     while(correct != true){

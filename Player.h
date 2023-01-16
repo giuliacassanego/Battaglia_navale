@@ -21,7 +21,7 @@ protected:
 	Grid grid;
 
 public:
-	Player(string n);
+	Player(string name);
 	
 	string getName() {return n;}
 	
