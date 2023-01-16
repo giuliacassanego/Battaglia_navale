@@ -9,12 +9,19 @@ using namespace std;
 
 class ComputerPlayer : public Player{
 
+    
 public:
-    ComputerPlayer(string n) : Player(n){}
-    Action nextAction() override;
+    ComputerPlayer(string n) : Player(n){prepareGrid();}
+    Action nextAction();
     string randomChosePos();
     
-	void prepareGrid() override;
+    
+    int chooseDirection();
+    Coordinates findStern(NavalUnit* n, Coordinates bow);
+    void prepareGrid();
+    
+    
 };
+
 
 #endif
