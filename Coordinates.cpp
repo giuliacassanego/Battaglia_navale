@@ -1,7 +1,6 @@
 //Cassanego Giulia
 
 #include "Coordinates.h"
-#include <iostream>
 
 Coordinates::Coordinates(string s)
 {

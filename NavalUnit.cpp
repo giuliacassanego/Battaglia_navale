@@ -96,3 +96,12 @@ void NavalUnit::hit(Coordinates target)
 		}
 	}
 }
+
+void NavalUnit::repair()
+{
+	shield = size;
+	for(int i = 0; i < size; i++)
+	{
+		hitState[i] = false;
+	}
+}

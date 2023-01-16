@@ -48,9 +48,9 @@ int main(void)
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();
 	
-	supportvessel2->action(Coordinates(5,7));
+	supportvessel2->action(Coordinates(2,2));
 	cout << player2.getGrid();
-	
+/*	
 	battleship1->action(Coordinates(4,7));
 	battleship1->action(Coordinates(5,7));
 	cout << "print grid2" << endl;
@@ -62,12 +62,12 @@ int main(void)
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();	
 	
-	submarine1->action(Coordinates(4,3));
+	submarine1->action(Coordinates(11,9));
 	cout << "print grid1" << endl;
 	cout << player1.getGrid();
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();	
-	
+	*/
 	return 0;
 	}
 	catch(exception e)

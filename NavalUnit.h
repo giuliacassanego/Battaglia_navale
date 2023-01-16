@@ -46,6 +46,7 @@ public:
 	bool isHit(int pos) {return hitState[pos];}
 	string getName(){return name;}
 	bool isSunk() {return shield == 0;}
+	void repair();
 	
 	virtual char getSymbol() = 0; 	//funzione virtuale
 	
