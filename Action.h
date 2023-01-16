@@ -19,6 +19,7 @@ private:
 	
 	
 public:
+	Action(){}
 	Action(ActionType type) : type(type) {}
 	Action(Coordinates source, Coordinates target) : type(UNIT_ACTION), source(source), target(target) {}
 	
