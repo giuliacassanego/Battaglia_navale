@@ -12,6 +12,7 @@ using namespace std;
 
 Player::Player(string n)
 {
+	this.n = n;
     hits=0; 
     win = false;
 }
@@ -71,6 +72,7 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 			getGrid().deleteSonar();
 			break;
 		case SHOW:
+			
 			break;
 		default:
 			break;
@@ -100,23 +102,53 @@ bool Player::hitOpponent(Coordinates target)
 vector<Coordinates> Player::scan(Coordinates center)
 {
 	vector<Coordinates> positions;
-	for(int i = (center.getX()-2); i < (center.getX()+2); i++)
+	for(int i = (center.getX()-2); i <= (center.getX()+2); i++)
 	{
-		for(int j = (center.getY()-2); j < (center.getY()+2); j++)
+		for(int j = (center.getY()-2); j <= (center.getY()+2); j++)
 		{
-			GridCell& cell = opponent->getGrid().getDefense(Coordinates(i, j));
-			if(!(cell.isVoid()))
+			try
 			{
-				positions.push_back(Coordinates(i,j));
+				if(Coordinates(i,j).isValid())
+				{
+					GridCell& cell = opponent->getGrid().getDefense(Coordinates(i, j));
+					if(!(cell.isVoid()))
+					{
+						positions.push_back(Coordinates(i,j));
+					}
+				}
+			
 			}
+			catch(invalid_argument e) {}
 		}
 	}
 	return positions;
 }
 
-/*
+int Player::getTotalShield()
+{
+	int n = 0;
+	for(int i = 0; i < units.size(); i++)
+	{
+		n += units[i]->getShield();
+	}
+	return n;
+}
+
+bool Player::hasLost()
+{
+	if(getTotalShield()==0)
+	{
+		return true;
+	}
+	return false;
+}
+
+Player* Player::checkWin()
+{
+	if(this->getTotalShield() > opponent->getTotalShield())
+	{
+		return this;
+	}
+	return opponent;
 	
-	
-	
-	bool Player::checkHit(Coordinates pos);//aggiorna shield
-	int Player::getTotalShield();*/
+}

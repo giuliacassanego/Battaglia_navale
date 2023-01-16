@@ -11,10 +11,10 @@ class ComputerPlayer : public Player{
 
 public:
     ComputerPlayer(string n) : Player(n){}
-    Action nextAction();
+    Action nextAction() override;
     string randomChosePos();
     
+	void prepareGrid() override;
 };
-
 
 #endif

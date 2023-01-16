@@ -8,7 +8,6 @@ using namespace std;
 
 int main(void)
 {
-	cout << "ciao" << endl;
 	try
 	{
 	Player player1("Player1");
@@ -42,19 +41,21 @@ int main(void)
 	cout << "Moving battleship" << endl;
 	battleship1->action(Coordinates(6,11));
 	battleship1->action(Coordinates(3,1));
-	submarine1->action(Coordinates(6,4));
+	submarine1->action(Coordinates(0,4));
 	cout << "print grid1" << endl;
 	cout << player1.getGrid();
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();
 	
-	supportvessel2->action(Coordinates(2,2));
-	cout << player2.getGrid();
-/*	
-	battleship1->action(Coordinates(4,7));
-	battleship1->action(Coordinates(5,7));
+	
+	battleship1->action(Coordinates(1,1));
+	battleship1->action(Coordinates(1,2));
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();
+	
+	supportvessel2->action(Coordinates(2,0));
+	cout << player2.getGrid();
+
 	
 	battleship1->action(Coordinates(6,7));
 	cout << "print grid1" << endl;
@@ -62,24 +63,17 @@ int main(void)
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();	
 	
-	submarine1->action(Coordinates(11,9));
+	submarine1->action(Coordinates(0,3));
 	cout << "print grid1" << endl;
 	cout << player1.getGrid();
 	cout << "print grid2" << endl;
 	cout << player2.getGrid();	
-	*/
+	
 	return 0;
 	}
-	catch(exception e)
+	catch(invalid_argument e)
 	{
 		cout << e.what() << endl;
 	}
-/*	//Gameplay
-	Player* active = &player1;
-	while (true) {
-		active->action(action);
-		// check if win
-		active = (active == &player1 ? &player2 : &player1);
-	}
-	*/
+
 }

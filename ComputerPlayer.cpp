@@ -8,18 +8,14 @@ Action ComputerPlayer::nextAction()
 {
     Action a;
     srand(time(NULL));
-    int n = rand()%3+1;
-    
-    if(n==1) //eseguo comando XX XX
-    {
-        a = Action(SHOW);
-    }
-    else if(n==2) //eseguo comando AA AA
+    int n = rand()%2+1;
+
+	if(n==1) //eseguo comando AA AA
     {
         a = Action(CLEAR);
     }
     else{
-        int unitMakeAction = rand()%(units.size()) +1;  //uso il this?? come lo vogliamo richiamare?
+        int unitMakeAction = rand()%(this->units.size()) +1;  //uso il this?? come lo vogliamo richiamare?
         Coordinates source(units[unitMakeAction]->getCenter());
         Coordinates target(randomChosePos());
         a = Action(source, target);

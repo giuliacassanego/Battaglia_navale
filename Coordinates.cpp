@@ -12,7 +12,7 @@ Coordinates::Coordinates(string s)
 	x = stoi(s.substr(1));
 	
 	//checks
-	if (x < 0 || x > 11 || y < 0 || y > 11)
+	if (!isValid())
 	{
 		throw invalid_argument("error: Invalid coordinates");
 	}
@@ -21,7 +21,7 @@ Coordinates::Coordinates(string s)
 Coordinates::Coordinates(int x, int y) : x(x), y(y)
 {
 	//checks
-	if (x < 0 || x > 11 || y < 0 || y > 11)
+	if (!isValid())
 	{
 		throw invalid_argument("error: Invalid coordinates");
 	}
@@ -48,4 +48,13 @@ string Coordinates::toX(int n)
 		throw invalid_argument("error: Invalid coordinates");
 	}
 	return to_string(n + 1) + (n < 9 ? "  " : " ");
+}
+
+bool Coordinates::isValid()
+{
+	if (x < 0 || x > 11 || y < 0 || y > 11)
+	{
+		return false;
+	}
+	return true;
 }

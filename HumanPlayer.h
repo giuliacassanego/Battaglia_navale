@@ -11,14 +11,9 @@ class HumanPlayer : public Player{
 
 public:
     HumanPlayer(string n) : Player(n){}
-    Action nextAction();
+    Action nextAction() override;
 
-    
+    void prepareGrid() override;
 };
-
-
-
-
-
 
 #endif
