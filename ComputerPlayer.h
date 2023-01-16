@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Action.h"
+#include "Coordinates.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ class ComputerPlayer : public Player{
 public:
     ComputerPlayer(string n) : Player(n){prepareGrid();}
     Action nextAction();
-    string randomChosePos();
+    Coordinates randomChosePos();
     
     
     int chooseDirection();
