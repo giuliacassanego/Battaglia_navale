@@ -1,9 +1,9 @@
 #include "ComputerPlayer.h"
 #include "BattleShip.h"
+
 #include <cstdlib>
 #include <ctime>
 #include <string>
-
 
 Action ComputerPlayer::nextAction()
 {
@@ -22,29 +22,29 @@ Action ComputerPlayer::nextAction()
     else{
         int unitMakeAction = rand()%(units.size()) +1;  //uso il this?? come lo vogliamo richiamare?
         Coordinates source(units[unitMakeAction]->getCenter());
-        Coordinates target(randomChosePos());
-        a = Action(source, target);
+        a = Action(source, randomChosePos());
     }
     return a;
 }
 
-string ComputerPlayer::randomChosePos() //metodo per target
+Coordinates ComputerPlayer::randomChosePos() //metodo per target
 {
     srand(time(NULL));
-    int n = rand()%12+1; 
-    
+    int num = rand()%12+1; 
+
     bool correctLett = false; 
-    int pos;
+    char pos;
     while(correctLett != true)
     {
-        pos =rand()%78+65; //scelgo una lettera casulamente con codice ascii: da A a N;
+        pos =65+rand()%(78-64); //scelgo una lettera casulamente con codice ascii: da A a N;
         if(pos != 74 && pos != 75)//controllo che non escano le lettere K e J
         {
             correctLett=true;
         }
-    }
-    string s = to_string(pos)+ to_string(n);
-    return s;
+    } 
+    string s = pos + to_string(num);
+    Coordinates coor(s);
+    return coor;
 }
 
 
@@ -63,76 +63,103 @@ Coordinates ComputerPlayer::findStern(NavalUnit* n, Coordinates bow) //metodo pe
     int dir = chooseDirection();
     int size = n->getSize();
 
-    x = (dir==1 ? x+= size : x); 
-    y= (dir==1 ? y : y+=size);
-    
+    x = (dir==1 ? x+= (size-1) : x); 
+    y= (dir==1 ? y : y+= (size-1));
+
     Coordinates stern(x, y);
     return stern;
 }
 
-
 void ComputerPlayer::prepareGrid()
 {
-    NavalUnit* battleship1 = addUnit(BATTLESHIP, "c1");
-    Coordinates bow = randomChosePos();
-    setUnitPosition(battleship1, bow, findStern(battleship1, bow));
+    cout << "Player1 is setting his Navalunits" <<endl;
     
-  /*
-    cout<< "Quali sono le coordiante per la corazzata 2?" << endl;
-    cin>> command1;
-    cin >> command2;
-    source = Coordinates(command1);
-    bow =Coordinates(command2);
-    NavalUnit* battleship2 = addUnit(BATTLESHIP, "c2");
-    setUnitPosition(battleship1, source, bow);
-     * */
-    
-    
-    
-    /*
-    //inserisco le corazzate
-    int corazzata=1;
-    while(corazzata<=3)
-    {
-        try{
-            
-            Coordinates bow(randomChosePos());
-            
-            NavalUnit*  n = addUnit(BATTLESHIP, "b"+to_string(corazzata)); //aggiungo al vector
-            
-            Coordinates stern(findStern(n, bow));
-            
-            setUnitPosition( n+to_string(corazzata), bow, stern); //aggiungo alla griglia
-            corazzata ++;
+    bool correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* battleship1 = addUnit(BATTLESHIP, "c1");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(battleship1, bow, findStern(battleship1, bow));
+            correct = true;
         }
-        catch(invalid_argument exception()){}
+        catch(invalid_argument e){}
     }
-    /*
-    //inserisoc le navi
-    int nave =1;
-    while(nave<=3)
-    {
-        try{
-            Coordinates bow(randomChoseInitial());
-            Coordinates stern(findStern(SUPPORTVESSEL, bow));
-            supportVessel+to_string(nave) = this.addUnit(SUPPORTVESSEL, "s"+to_string(nave); //aggiungo al vector
-            this->setUnitPosition(supportVessel+to_string(i), bow, stern); //aggiungo alla griglia
-            nave++;
+    
+    correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* battleship2 = addUnit(BATTLESHIP, "c2");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(battleship2, bow, findStern(battleship2, bow));
+            correct = true;
         }
-        catch(invalid_argument exception()){}
+        catch(invalid_argument e){}
     }
-    //inserisoc i sottomarini
-    int sottomarino =1;
-    while(sottomarino <=2)
-    {
-        try{
-            Coordinates bow(randomChoseInitial());
-            submarine+to_string(i) = this.addUnit(SUBMARINE, "e"+to_string(sottomarino); //aggiungo al vector
-            this->setUnitPosition(submarine+to_string(sottomarino), bow, bow); //aggiungo alla griglia
-            sottomarino++;
+    
+    correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* battleship3 = addUnit(BATTLESHIP, "c3");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(battleship3, bow, findStern(battleship3, bow));
+            correct = true;
         }
-        catch(invalid_argument exception()){}
+        catch(invalid_argument e){}
     }
-     * */
+    
+    correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* supportvessel1 = addUnit(SUPPORTVESSEL, "s1");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(supportvessel1, bow, findStern(supportvessel1, bow));
+            correct = true;
+        }
+        catch(invalid_argument e){}
+    }
+    
+    correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* supportvessel2 = addUnit(SUPPORTVESSEL, "s2");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(supportvessel2, bow, findStern(supportvessel2, bow));
+            correct = true;
+        }
+        catch(invalid_argument e){}
+    }
+    
+    correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* supportvessel3 = addUnit(SUPPORTVESSEL, "s3");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(supportvessel3, bow, findStern(supportvessel3, bow));
+            correct = true;
+        }
+        catch(invalid_argument e){}
+    }
+    
+    correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* submarine1 = addUnit(SUBMARINE, "e1");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(submarine1, bow, findStern(submarine1, bow));
+            correct = true;
+        }
+        catch(invalid_argument e){}
+    }
+    
+    correct = false;
+    while(correct != true){
+         try{
+            NavalUnit* submarine2 = addUnit(SUBMARINE, "e2");
+            Coordinates bow = randomChosePos();
+            setUnitPosition(submarine2, bow, findStern(submarine2, bow));
+            correct = true;
+        }
+        catch(invalid_argument e){}
+    }
 }
 
