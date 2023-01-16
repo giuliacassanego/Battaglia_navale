@@ -13,9 +13,6 @@ public:
     HumanPlayer(string n) : Player(n){prepareGrid();}
     Action nextAction();
     
-    string getSource(string s);
-    string getBow(string s);
-    
     void prepareGrid();
 
     
