@@ -9,7 +9,15 @@ using namespace std;
 void SupportVessel::action(Coordinates target)
 {
 	cout << "SupportVessel action" << endl;
-	move(target);
+	 bool correct = false;
+    while(correct!= true)
+    {
+        try{
+            move(target);
+        }
+        catch(invalid_argument e){cout << "errore in move di supportvessel" <<e.what() <<endl;}
+    }
+    
 	
 	for(int i = target.getX() - 1; i <= target.getX() + 1; i++)	//area 3x3
 	{

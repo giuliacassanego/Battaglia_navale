@@ -16,6 +16,7 @@ protected:
     int hits; //numero dei colpi andati a segno
     bool win;
 	vector<NavalUnit*> units;
+    vector<Coordinates> centers;
 	
 	Player *opponent;
 	Grid grid;

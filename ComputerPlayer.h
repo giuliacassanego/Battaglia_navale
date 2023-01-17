@@ -2,6 +2,7 @@
 #define COMPUTERPLAYER_H
 
 #include <iostream>
+#include <vector>
 #include "Player.h"
 #include "Action.h"
 #include "Coordinates.h"
@@ -10,6 +11,8 @@ using namespace std;
 
 class ComputerPlayer : public Player{
 
+private:
+    vector<Coordinates> centers;
     
 public:
     ComputerPlayer(string n) : Player(n){prepareGrid();}

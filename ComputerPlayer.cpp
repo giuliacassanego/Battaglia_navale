@@ -8,18 +8,50 @@
 Action ComputerPlayer::nextAction()
 {
     Action a;
+    
     srand(time(NULL));
     int n = rand()%2+1;
-    
-    if(n==1) //eseguo comando AA AA
-    {
+
+    //if(n==1) //eseguo comando AA AA
+    /*{
+        cout << "comando AA";
+        
         a = Action(CLEAR);
     }
     else{
-        int unitMakeAction = rand()%(units.size()) +1;  //uso il this?? come lo vogliamo richiamare?
-        Coordinates source(units[unitMakeAction]->getCenter());
-		a = Action(source, randomChosePos());
-    }
+       // int unitMakeAction = rand()%8+1;  //uso il this?? come lo vogliamo richiamare?
+        
+        
+        //cout << unitMakeAction<< endl;
+        
+        //cout <<"centers size" << centers.size() <<endl;
+        //cout << centers[unitMakeAction]->getSymbol() <<endl;
+        
+        
+        //Coordinates source(centers[unitMakeAction]->getCenter());
+        */
+        bool correct = false;
+		while(correct != true)
+        {
+            try{
+                int num = rand()%(centers.size()-1);
+                cout << "center size " <<centers.size()<<endl;
+                cout <<"cooridnata random nel vector " << num<<endl;
+                Coordinates source = centers[num];
+                
+                
+                cout << "coordinata x" << source.getX()<<endl;
+                cout << "coordinata y" << source.getY()<<endl;
+                
+                
+                a = Action(source, randomChosePos());
+                
+                correct = true;
+            }
+            catch(invalid_argument e){ cout << "do bae";}
+        }
+        
+   // }
     return a;
 }
 
@@ -68,7 +100,7 @@ Coordinates ComputerPlayer::findStern(NavalUnit* n, Coordinates bow) //metodo pe
 
 void ComputerPlayer::prepareGrid()
 {
-    cout << getName() << " is setting his Navalunits" <<endl;
+    cout << getName() << " is setting his Navalcenters" <<endl;
     
     bool correct = false;
     while(correct != true){
@@ -76,6 +108,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* battleship1 = addUnit(BATTLESHIP, "c1");
             Coordinates bow = randomChosePos();
             setUnitPosition(battleship1, bow, findStern(battleship1, bow));
+            centers.push_back(battleship1->getCenter()); 
             correct = true;
         }
         catch(invalid_argument e){}
@@ -87,6 +120,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* battleship2 = addUnit(BATTLESHIP, "c2");
             Coordinates bow = randomChosePos();
             setUnitPosition(battleship2, bow, findStern(battleship2, bow));
+           centers.push_back(battleship2->getCenter()); 
             correct = true;
         }
         catch(invalid_argument e){}
@@ -98,6 +132,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* battleship3 = addUnit(BATTLESHIP, "c3");
             Coordinates bow = randomChosePos();
             setUnitPosition(battleship3, bow, findStern(battleship3, bow));
+     centers.push_back(battleship3->getCenter()); 
             correct = true;
         }
         catch(invalid_argument e){}
@@ -109,6 +144,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* supportvessel1 = addUnit(SUPPORTVESSEL, "s1");
             Coordinates bow = randomChosePos();
             setUnitPosition(supportvessel1, bow, findStern(supportvessel1, bow));
+           centers.push_back(supportvessel1->getCenter()); 
             correct = true;
         }
         catch(invalid_argument e){}
@@ -120,6 +156,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* supportvessel2 = addUnit(SUPPORTVESSEL, "s2");
             Coordinates bow = randomChosePos();
             setUnitPosition(supportvessel2, bow, findStern(supportvessel2, bow));
+         centers.push_back(supportvessel2->getCenter());
             correct = true;
         }
         catch(invalid_argument e){}
@@ -131,6 +168,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* supportvessel3 = addUnit(SUPPORTVESSEL, "s3");
             Coordinates bow = randomChosePos();
             setUnitPosition(supportvessel3, bow, findStern(supportvessel3, bow));
+          centers.push_back(supportvessel3->getCenter());
             correct = true;
         }
         catch(invalid_argument e){}
@@ -142,6 +180,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* submarine1 = addUnit(SUBMARINE, "e1");
             Coordinates bow = randomChosePos();
             setUnitPosition(submarine1, bow, findStern(submarine1, bow));
+            centers.push_back(submarine1->getCenter());
             correct = true;
         }
         catch(invalid_argument e){}
@@ -153,6 +192,7 @@ void ComputerPlayer::prepareGrid()
             NavalUnit* submarine2 = addUnit(SUBMARINE, "e2");
             Coordinates bow = randomChosePos();
             setUnitPosition(submarine2, bow, findStern(submarine2, bow));
+            centers.push_back(submarine2->getCenter());
             correct = true;
         }
         catch(invalid_argument e){}

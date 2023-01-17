@@ -7,8 +7,9 @@ using namespace std;
 
 void BattleShip::action(Coordinates target)
 {
-	cout << "Battleshp action" << endl;
+	cout << "Battleship action" << endl;
 	bool hit = player->hitOpponent(target);
+    
 	cout << "hit: " << hit << endl;
 	if(hit)
 	{

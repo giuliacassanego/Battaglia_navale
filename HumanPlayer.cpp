@@ -9,7 +9,7 @@ Action HumanPlayer::nextAction()
     Coordinates target;
     bool correct = false;
     
-    while(correct)
+    while(correct != true)
     {
         cout<<"Inserire coordinate dell'unita da far giocare e dove attaccare";
         cin >> command1;

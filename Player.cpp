@@ -61,7 +61,10 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 		case UNIT_ACTION:
 		{
 			NavalUnit *unit = findUnit(action.getSource());
-			if(unit == nullptr)
+            
+            cout<< "simbolo dell'unita in find di player "<<unit->getSymbol()<<endl;
+			
+            if(unit == nullptr)
 			{
 				throw invalid_argument("Invalid source");
 			}
@@ -72,7 +75,7 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 			getGrid().deleteSonar();
 			break;
 		case SHOW:
-			
+			cout<<getGrid();
 			break;
 		default:
 			break;
