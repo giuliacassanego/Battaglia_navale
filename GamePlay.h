@@ -20,7 +20,7 @@ public:
 	GamePlay(PlayMode mode) : mode(mode) {}
 	
 	void playGame();
-	void activePlayer(Player p1, Player p2);
+	//void activePlayer(Player p1, Player p2);
 };
 
 #endif
