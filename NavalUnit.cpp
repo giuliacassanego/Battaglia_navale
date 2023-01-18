@@ -90,6 +90,16 @@ void NavalUnit::move(Coordinates target)
 	}
 }
 
+void NavalUnit::setCenter(Coordinates target)
+{
+    GridCell& cell = player->getGrid().getDefense(target);
+    if(!cell.isVoid())
+    {
+        throw invalid_argument("Position occupied");
+    }
+    center=target;
+}
+
 void NavalUnit::hit(Coordinates target)
 {
 	vector<Coordinates> positions = getGridPositions();

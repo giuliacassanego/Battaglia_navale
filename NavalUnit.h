@@ -39,7 +39,7 @@ public:
 	vector<Coordinates> getGridPositions() {return getGridPositions(center);}	//vettore posizioni corrente unità
 	vector<Coordinates> getGridPositions(Coordinates center);	//vettore nuova posizione per verificare se libero
 	Coordinates getCenter() {return center;}
-	void setCenter(Coordinates target) {center = target;}
+	void setCenter(Coordinates target); // {center = target;}
 	int getSize() {return size;}
 	int getShield() {return shield;}
 	void hit(Coordinates target);	//in checkHit
