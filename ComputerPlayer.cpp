@@ -25,13 +25,14 @@ Action ComputerPlayer::nextAction()
 		int num = rand()%(units.size()-1);
 		Coordinates source = units[num]->getCenter();
 		GridCell& cell1 = getGrid().getDefense(source);
-		char symbol = cell1.getSymbol();
+		Coordinates target;
+        char symbol = cell1.getSymbol();
 		
 		bool correct = false;
 		while(correct != true)
         {
-			try{ 
-				Coordinates target = randomChosePos();
+            target = randomChosePos();
+            try{ 
 				GridCell& cell2 = getGrid().getDefense(target);
 		
 				if(symbol == 'C' || symbol == 'c')
@@ -52,7 +53,6 @@ Action ComputerPlayer::nextAction()
         }
 //   }
 	actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
-	cout << "size actionCoords " << actionCoords.size() << endl;
     return a;
 }
 

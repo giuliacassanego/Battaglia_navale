@@ -62,8 +62,8 @@ bool Coordinates::isValid()
 	return true;
 }
 
-string Coordinates::createString(Coordinates pos1, Coordinates pos2, int shield)
+string Coordinates::createString(Coordinates pos1, Coordinates pos2)
 {
 	string s;
-	return s+= toY(pos1.getY()) + toX(pos1.getX()) + " " + toY(pos2.getY()) + toX(pos2.getX()) + " " + to_string(shield);
+	return s+= toY(pos1.getY()) + toX(pos1.getX()) + " " + toY(pos2.getY()) + toX(pos2.getX());
 }

@@ -44,7 +44,7 @@ void Player::setUnitPosition(NavalUnit* unit, Coordinates bow, Coordinates stern
 {
 	unit->setPosition(bow, stern);
 	grid.insert(unit);
-	initPos.push_back(Coordinates::createString(bow, stern, unit->getShield()));
+	initPos.push_back(Coordinates::createString(bow, stern));
 }
 
 NavalUnit* Player::findUnit(Coordinates center)
@@ -66,12 +66,12 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 		case UNIT_ACTION:
 		{
 			NavalUnit *unit = findUnit(action.getSource());
-			
+
             if(unit == nullptr || !action.getTarget().isValid())
-			{
-				throw invalid_argument("Invalid source");
-			}
-			unit->action(action.getTarget());
+            {
+                throw invalid_argument("Invalid source");
+            }
+            unit->action(action.getTarget());
 			break;
 		}
 		case CLEAR:

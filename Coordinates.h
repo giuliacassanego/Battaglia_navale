@@ -25,7 +25,7 @@ public:
 	static string toY(int n);
 	static string toX(int n);
 	
-	static string createString(Coordinates pos1, Coordinates pos2, int shield);
+	static string createString(Coordinates pos1, Coordinates pos2);
 	
 	bool isValid();
 	

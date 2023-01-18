@@ -41,9 +41,8 @@ void GamePlay::playGame()
 			}
 
 			logFile << "The first action is of " << active->getName() <<  "\n";
-
+            int n = 0;
 			try{
-				int n = 0;
 				while(n < 6)
 				{
 					cout << endl << "Game turn of " << active->getName() << endl;
@@ -91,8 +90,8 @@ void GamePlay::playGame()
 			
 			logFile << "The first action is of " << active->getName() <<  "\n";
   
+            int n = 0;
 			try{
-				int n = 0;
 				while(n < 6)
 				{       
 					cout << "Game turn of " << active->getName() << endl;

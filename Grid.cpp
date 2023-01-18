@@ -15,7 +15,11 @@ using namespace std;
 
 GridCell& Grid::getDefense(Coordinates pos)
 {
-	return defense[pos.getX()][pos.getY()];
+	if(!pos.isValid())
+    {
+        throw invalid_argument("Out of boundaries position");
+    }
+    return defense[pos.getX()][pos.getY()];
 }
 
 GridCell& Grid::getAttack(Coordinates pos)

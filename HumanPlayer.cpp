@@ -37,44 +37,32 @@ Action HumanPlayer::nextAction()
 		}
 		else
 		{
-			//try {
+			try {
 				source = Coordinates(command1);
 				target = Coordinates(command2);
+                
+                GridCell& cell1 = getGrid().getDefense(source);
+                GridCell& cell2 = getGrid().getDefense(target);
 				
-				GridCell& cell1 = getGrid().getDefense(source);
-				GridCell& cell2 = getGrid().getDefense(target);
-				
-				char symbol = cell1.getSymbol();
+                char symbol = cell1.getSymbol();
 
 				if(!cell1.isVoid())
 				{
-					try{
-						if(symbol == 'C' || symbol == 'c')
-						{
-							a = Action(source, target);
-							actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
-							cout << "size actionCoords " << actionCoords.size() << endl;
-							correct = true;
-						}
-						else if(cell2.isVoid())
-						{
-							a = Action(source, target);
-							actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
-							cout << "size actionCoords " << actionCoords.size() << endl;
-							correct = true;
-						}
-					}
-					catch(invalid_argument e) {cout << e.what() << endl;}
+                    if(symbol == 'C' || symbol == 'c')
+                    {
+                        a = Action(source, target);
+                        actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
+                        correct = true;
+                    }
+                    else if(cell2.isVoid())
+                    {
+                        a = Action(source, target);
+                        actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
+                        correct = true;
+                    }
 				}
-				else	//DA CAPIRE al max aggiungere actionCoords
-				{
-					try {
-						a = Action(source, target);
-					}
-					catch(invalid_argument e) {cout << e.what() << endl;}
-				}
-			//}
-			//catch(invalid_argument e) {cout << e.what() << endl;}
+			}
+			catch(invalid_argument e){cout << e.what() << endl;}
 		}
     }
     return a;

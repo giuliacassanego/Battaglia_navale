@@ -67,10 +67,14 @@ vector<Coordinates> NavalUnit::getGridPositions(Coordinates centerPos)
 
 void NavalUnit::move(Coordinates target)
 {
-	if(!target.isValid() || !(Coordinates(target.getX()+(size/2), target.getY()).isValid()) || !(Coordinates(target.getX()-(size/2), target.getY()).isValid()))
-	{
-		throw invalid_argument("Invalid position");
-	}
+	try{
+        if(!target.isValid() || !(Coordinates(target.getX()+(size/2), target.getY()).isValid()) || !(Coordinates(target.getX()-(size/2), target.getY()).isValid()))
+        {
+            throw invalid_argument("Invalid position");
+        }
+    }
+    catch(invalid_argument e){cout << e.what() << endl;}
+    
 	
 	Coordinates oldCenter = getCenter();
 	try
