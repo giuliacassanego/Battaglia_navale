@@ -20,7 +20,6 @@ protected:
 	string n;
 	vector<NavalUnit*> units;
 	vector<string> initPos;	//save bow and stern for the insert for the log.txt
-	vector<string> actionCoords; //save source and target for the action for the log.txt
 	Player *opponent;
 	Grid grid;
 
@@ -55,7 +54,6 @@ public:
 	vector<Coordinates> scan(Coordinates center); //used in Submarine::action
 	
 	string getInitPos();
-	string getActionCoords();
 };
 
 #endif
