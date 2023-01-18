@@ -1,31 +1,82 @@
+/**
+ * @brief Definitions of functions of HumanPlayer
+ */
+
 #include "HumanPlayer.h"
 
 Action HumanPlayer::nextAction()
 {
+	Action a;
     string command1;
     string command2;
-    
     Coordinates source;
     Coordinates target;
+	
     bool correct = false;
-    
     while(correct != true)
     {
-        cout<<"Inserire coordinate dell'unita da far giocare e dove attaccare";
-        cin >> command1;
-        cin >> command2;
+		cout << "Insert XYOrigin XYTarget" << endl;
+		cin >> command1;
+		cin >> command2;
+		
+		if (command1 == "AA" && command2 == "AA")
+		{
+			cout << "Command AA AA" << endl;
+			a = Action(CLEAR);
+			actionCoords.push_back("AA AA");
+			cout << "size actionCoords " << actionCoords.size() << endl;
+			correct = true;
+		}
+		else if(command1 == "XX" && command2 == "XX")
+		{
+			cout << "Command XX XX" << endl;
+			a = Action(SHOW);
+			actionCoords.push_back("XX XX");
+			cout << "size actionCoords " << actionCoords.size() << endl;
+			correct = true;
+		}
+		else
+		{
+			//try {
+				source = Coordinates(command1);
+				target = Coordinates(command2);
+				
+				GridCell& cell1 = getGrid().getDefense(source);
+				GridCell& cell2 = getGrid().getDefense(target);
+				
+				char symbol = cell1.getSymbol();
 
-        source = Coordinates(command1);
-        target = Coordinates(command2);
-        
-        //contorllo se è void?
-        GridCell& cell = getGrid().getDefense(source);
-        if(!cell.isVoid())
-        {
-            correct =true;
-        }
+				if(!cell1.isVoid())
+				{
+					try{
+						if(symbol == 'C' || symbol == 'c')
+						{
+							a = Action(source, target);
+							actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
+							cout << "size actionCoords " << actionCoords.size() << endl;
+							correct = true;
+						}
+						else if(cell2.isVoid())
+						{
+							a = Action(source, target);
+							actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
+							cout << "size actionCoords " << actionCoords.size() << endl;
+							correct = true;
+						}
+					}
+					catch(invalid_argument e) {cout << e.what() << endl;}
+				}
+				else	//DA CAPIRE al max aggiungere actionCoords
+				{
+					try {
+						a = Action(source, target);
+					}
+					catch(invalid_argument e) {cout << e.what() << endl;}
+				}
+			//}
+			//catch(invalid_argument e) {cout << e.what() << endl;}
+		}
     }
-    Action a(source, target);
     return a;
 }
 
@@ -40,7 +91,7 @@ void HumanPlayer::prepareGrid()
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per la corazzata 1?" << endl;
+            cout<< "Insert coordinates of battleship 1" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -49,14 +100,14 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(battleship1, bow, stern);
             correct = true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what() << endl;}
     }
     
     correct = false;
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per la corazzata 2?" << endl;
+            cout<< "Insert coordinates of battleship 2" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -65,14 +116,14 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(battleship2, bow, stern);
             correct =true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what() << endl;}
     }
     
     correct = false;
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per la corazzata 3?" << endl;
+            cout<< "Insert coordinates of battleship 3" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -81,14 +132,14 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(battleship3, bow, stern);
             correct = true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what() << endl;}
     }
     
     correct = false;
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per la nave di supporto 1?" << endl;
+            cout<< "Insert coordinates of support vessel 1" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -97,14 +148,14 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(supportivevessel1, bow, stern);
             correct = true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what() << endl;}
     }
     
     correct = false;
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per la nave di supporto 2?" << endl;
+            cout<< "Insert coordinates of support vessel 2" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -113,14 +164,14 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(supportivevessel2, bow, stern);
             correct = true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what() << endl;}
     }
     
     correct = false;
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per la nave di supporto 3?" << endl;
+            cout<< "Insert coordinates of support vessel 3" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -129,14 +180,14 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(supportivevessel3, bow, stern);
             correct = true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what() << endl;}
     }
     
     correct = false;
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per il sottomarino 1?" << endl;
+            cout<< "Insert coordinates of submarine 1" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -145,14 +196,14 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(submarine1, bow, stern);
             correct = true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what() << endl;}
     }
     
     correct = false;
     while(correct != true)
     {
         try{
-            cout<< "Quali sono le coordinate per il sottomarino 2?" << endl;
+            cout<< "Insert coordinates of submarine 2" << endl;
             cin>> command1;
             cin >> command2;
             bow = Coordinates(command1);
@@ -161,7 +212,6 @@ void HumanPlayer::prepareGrid()
             setUnitPosition(submarine2, bow, stern);
             correct = true;
         }
-        catch(invalid_argument e){cout<< e.what()<<endl;}
+        catch(invalid_argument e){cout << e.what()<< endl;}
     }
-
 }

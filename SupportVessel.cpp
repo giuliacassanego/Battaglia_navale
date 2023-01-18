@@ -1,3 +1,8 @@
+/**
+ * @brief Definitions of functions of SupportVessel
+ * @param target
+ */
+
 #include <iostream>
 
 #include "SupportVessel.h"
@@ -9,16 +14,15 @@ using namespace std;
 void SupportVessel::action(Coordinates target)
 {
 	cout << "SupportVessel action" << endl;
-	 bool correct = false;
-    while(correct!= true)
-    {
-        try{
-            move(target);
-        }
-        catch(invalid_argument e){cout << "errore in move di supportvessel" <<e.what() <<endl;}
-    }
-    
 	
+	try{
+		move(target);
+	}
+	catch(invalid_argument e)
+	{
+		cout << e.what() << endl;
+	}
+
 	for(int i = target.getX() - 1; i <= target.getX() + 1; i++)	//area 3x3
 	{
 		for(int j = target.getY() - 1; j <= target.getY() + 1; j++)

@@ -1,4 +1,8 @@
-//Cassanego Giulia
+/**
+ * @brief Definitions of functions of Player
+ * @param name
+ */
+
 #include <iostream>
 #include <stdexcept>
 
@@ -40,6 +44,7 @@ void Player::setUnitPosition(NavalUnit* unit, Coordinates bow, Coordinates stern
 {
 	unit->setPosition(bow, stern);
 	grid.insert(unit);
+	initPos.push_back(Coordinates::createString(bow, stern, unit->getShield()));
 }
 
 NavalUnit* Player::findUnit(Coordinates center)
@@ -61,10 +66,8 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 		case UNIT_ACTION:
 		{
 			NavalUnit *unit = findUnit(action.getSource());
-            
-            cout<< "simbolo dell'unita in find di player "<<unit->getSymbol()<<endl;
 			
-            if(unit == nullptr)
+            if(unit == nullptr || !action.getTarget().isValid())
 			{
 				throw invalid_argument("Invalid source");
 			}
@@ -72,10 +75,12 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 			break;
 		}
 		case CLEAR:
-			getGrid().deleteSonar();
+		{
+			this->getGrid().deleteSonar();
 			break;
+		}
 		case SHOW:
-			cout<<getGrid();
+			cout << getGrid();
 			break;
 		default:
 			break;
@@ -137,15 +142,6 @@ int Player::getTotalShield()
 	return n;
 }
 
-bool Player::hasLost()
-{
-	if(getTotalShield()==0)
-	{
-		return true;
-	}
-	return false;
-}
-
 Player* Player::checkWin()
 {
 	if(this->getTotalShield() > opponent->getTotalShield())
@@ -153,5 +149,24 @@ Player* Player::checkWin()
 		return this;
 	}
 	return opponent;
-	
+}
+
+string Player::getInitPos()
+{
+	string s;
+	for(int i = 0; i < initPos.size(); i++)
+	{
+		s += initPos[i] + "\n";
+	}
+	return s;
+}
+
+string Player::getActionCoords()
+{
+	string s;
+	for(int i = 0; i < actionCoords.size(); i++)
+	{
+		s += actionCoords[i] + "\n";
+	}
+	return s;
 }

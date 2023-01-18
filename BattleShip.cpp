@@ -1,3 +1,8 @@
+/**
+ * @author Giulia Cassanego
+ * @brief Definitions of functions of BattleShip
+ */
+
 #include <iostream>
 
 #include "BattleShip.h"
@@ -19,5 +24,4 @@ void BattleShip::action(Coordinates target)
 	{
 		player->getGrid().getAttack(target).setMiss();	
 	}
-	
 }

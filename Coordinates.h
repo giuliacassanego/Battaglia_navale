@@ -25,6 +25,8 @@ public:
 	static string toY(int n);
 	static string toX(int n);
 	
+	static string createString(Coordinates pos1, Coordinates pos2, int shield);
+	
 	bool isValid();
 	
 	bool operator==(Coordinates& other) {return other.getX()==getX() && other.getY()==getY();}

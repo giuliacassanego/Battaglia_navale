@@ -1,3 +1,7 @@
+/**
+ * @brief Definitions of functions of GridCell
+ */
+
 #include "GridCell.h"
 
 void GridCell::clear()

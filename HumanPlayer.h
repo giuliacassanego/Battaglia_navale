@@ -14,8 +14,6 @@ public:
     Action nextAction();
     
     void prepareGrid();
-
-    
 };
 
 #endif

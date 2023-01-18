@@ -10,9 +10,6 @@
 using namespace std;
 
 class ComputerPlayer : public Player{
-
-private:
-    vector<Coordinates> centers;
     
 public:
     ComputerPlayer(string n) : Player(n){prepareGrid();}

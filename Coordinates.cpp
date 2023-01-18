@@ -1,4 +1,7 @@
-//Cassanego Giulia
+/**
+ * @brief 
+ * @param Definitions of functions of Coordinates
+ */
 
 #include "Coordinates.h"
 
@@ -9,7 +12,7 @@ Coordinates::Coordinates(string s)
 	{
 		y -= 2;
 	}
-	x = stoi(s.substr(1)) - 1;
+	x = (stoi(s.substr(1))) -1;
 	
 	//checks
 	if (!isValid())
@@ -57,4 +60,10 @@ bool Coordinates::isValid()
 		return false;
 	}
 	return true;
+}
+
+string Coordinates::createString(Coordinates pos1, Coordinates pos2, int shield)
+{
+	string s;
+	return s+= toY(pos1.getY()) + toX(pos1.getX()) + " " + toY(pos2.getY()) + toX(pos2.getX()) + " " + to_string(shield);
 }

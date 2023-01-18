@@ -1,8 +1,21 @@
+/**
+ * @class Action
+ * @author Giulia Cassanego
+ * @date 17/01/2023
+ * @file Action.h
+ * @brief This class constructs an Action object used by players in GamePlay
+ */
+
 #ifndef ACTION_H
 #define ACTION_H
 
+#include <vector>
+
 #include "Coordinates.h"
 
+/**
+ * @enum that represents the three possible types of actions
+ */
 enum ActionType
 {
 	UNIT_ACTION,
@@ -10,14 +23,14 @@ enum ActionType
 	CLEAR	//AA AA
 };
 
+
 class Action
 {
 private:
 	ActionType type;
 	Coordinates source;
 	Coordinates target;
-	
-	
+
 public:
 	Action() {}
 	Action(ActionType type) : type(type) {}
@@ -26,6 +39,8 @@ public:
 	ActionType getType() {return type;}
 	Coordinates getSource() {return source;}
 	Coordinates getTarget() {return target;}
+	
+	
 };
 
 #endif

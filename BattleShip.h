@@ -1,3 +1,11 @@
+/**
+ * @class BattleShip
+ * @author Giulia Cassanego
+ * @date 17/01/2023
+ * @file BattleShip.h
+ * @brief This class is a subclass of NavalUnit
+ */
+
 #ifndef BATTLESHIP_H
 #define BATTLESHIP_H
 

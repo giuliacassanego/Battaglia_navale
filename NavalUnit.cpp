@@ -1,3 +1,10 @@
+/**
+ * @brief Definitions of functions of NavalUnit
+ * @param name
+ * @param size
+ * @param player
+ */
+
 #include <iostream>
 using namespace std;
 
@@ -11,7 +18,6 @@ NavalUnit::NavalUnit(string name, int size, Player *player) : name(name), size(s
 		hitState.push_back(false);
 	}
 }
-
 
 void NavalUnit::setPosition(Coordinates bow, Coordinates stern)
 {
@@ -61,6 +67,11 @@ vector<Coordinates> NavalUnit::getGridPositions(Coordinates centerPos)
 
 void NavalUnit::move(Coordinates target)
 {
+	if(!target.isValid() || !(Coordinates(target.getX()+(size/2), target.getY()).isValid()) || !(Coordinates(target.getX()-(size/2), target.getY()).isValid()))
+	{
+		throw invalid_argument("Invalid position");
+	}
+	
 	Coordinates oldCenter = getCenter();
 	try
 	{
@@ -68,12 +79,10 @@ void NavalUnit::move(Coordinates target)
 		setCenter(target);
 		player->getGrid().insert(this);
 	}
-	catch(exception e)
+	catch(invalid_argument e)
 	{
-		cout << "Insert failed" << endl;
 		setCenter(oldCenter);
 		player->getGrid().insert(this);
-		throw invalid_argument("Invalid position");
 	}
 }
 

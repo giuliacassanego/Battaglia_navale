@@ -1,4 +1,7 @@
-//Cassanego Giulia 2032560
+/**
+ * @brief Definitions of functions of Grid
+ * @param pos
+ */
 
 #include <ostream>
 #include <stdio.h>
@@ -67,7 +70,7 @@ void Grid::deleteSonar()	//cerco Y e riporto a carattere iniziale
 
 ostream& operator<< (ostream& os, Grid grid)
 {
-	os << endl << "Griglia di difesa                                         Griglia di attacco" << endl;
+	os << endl << "Defence grid                                              Attack grid" << endl;
 	//griglia difesa
 	for (int j = 0; j < 12; j++)
 	{
@@ -97,24 +100,5 @@ ostream& operator<< (ostream& os, Grid grid)
 	{
 		os << Coordinates::toX(i) << " ";
 	}
-/*
-	os << endl << endl << "Griglia di attacco" << endl;
-	
-	//griglia attacco
-	for (int j = 0; j < 12; j++)
-	{
-		os << Coordinates::toY(j) << " | ";
-		for (int i = 0; i < 12; i++)
-		{
-			os << grid.getAttack(Coordinates(i, j)).getSymbol() << " | ";
-		}
-		os << endl;
-	}
-	os << "  | ";
-	for (int i = 0; i < 12; i++)	//stampo ultima riga, solo numeri senza |
-	{
-		os << Coordinates::toX(i) << " ";
-	}
-*/	
-	return os << endl;
+	return os << endl << endl;
 }
