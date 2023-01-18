@@ -158,13 +158,3 @@ string Player::getInitPos()
 	}
 	return s;
 }
-
-string Player::getActionCoords()
-{
-	string s;
-	for(int i = 0; i < actionCoords.size(); i++)
-	{
-		s += actionCoords[i] + "\n";
-	}
-	return s;
-}
