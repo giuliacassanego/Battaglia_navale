@@ -26,13 +26,15 @@ private:
 	ofstream logFile;
     
 	//Randomly choose the beginner of the game
-    int start(); 
+    	int start(); 
+	vector<string> actionCoords;	//source e target per azioni
 	
 public:
 	GamePlay(PlayMode mode) : mode(mode) {}
     
-    //Function which plays the game
+    	//Function which plays the game
 	void playGame(); 
+	string getActionCoords();
 };
 
 #endif
