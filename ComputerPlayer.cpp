@@ -29,25 +29,25 @@ Action ComputerPlayer::nextAction()
 		Coordinates source = units[num]->getCenter();
 		GridCell& cell1 = getGrid().getDefense(source);
 		Coordinates target;
-        char symbol = cell1.getSymbol();
+        	char symbol = cell1.getSymbol();
 		
 		bool correct = false;
 		while(correct != true)
-        {
-            target = randomChosePos();
-            try{ 
-				GridCell& cell2 = getGrid().getDefense(target);
-		
-				if(symbol == 'C' || symbol == 'c')
-				{
-					a = Action(source, target);
-					correct = true;
-				}
-				else if(cell2.isVoid())
-				{
-					a = Action(source, target);
-					correct = true;
-				}
+        	{
+		    target = randomChosePos();
+		    try{ 
+			GridCell& cell2 = getGrid().getDefense(target);
+
+			if(symbol == 'C' || symbol == 'c')
+			{
+				a = Action(source, target);
+				correct = true;
+			}
+			else if(cell2.isVoid())
+			{
+				a = Action(source, target);
+				correct = true;
+			}
 			}
 			catch(invalid_argument e)
 			{
@@ -55,7 +55,6 @@ Action ComputerPlayer::nextAction()
 			}
         }
 //   }
-	actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
     return a;
 }
 
