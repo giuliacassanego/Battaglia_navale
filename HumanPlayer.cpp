@@ -24,14 +24,12 @@ Action HumanPlayer::nextAction()
 		{
 			cout << "Command AA AA" << endl;
 			a = Action(CLEAR);
-			actionCoords.push_back("AA AA");
 			correct = true;
 		}
 		else if(command1 == "XX" && command2 == "XX")
 		{
 			cout << "Command XX XX" << endl;
 			a = Action(SHOW);
-			actionCoords.push_back("XX XX");
 			correct = true;
 		}
 		else
@@ -50,13 +48,11 @@ Action HumanPlayer::nextAction()
                     if(symbol == 'C' || symbol == 'c')
                     {
                         a = Action(source, target);
-                        actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
                         correct = true;
                     }
                     else if(cell2.isVoid())
                     {
                         a = Action(source, target);
-                        actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
                         correct = true;
                     }
                     else{
