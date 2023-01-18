@@ -1,10 +1,8 @@
 /**
- * @brief Definitions of functions of NavalUnit
- * @param name
- * @param size
- * @param player
+ * @author Giulia Cassanego 2032560
+ * @brief Definition of functions of NavalUnit.h
  */
-
+ 
 #include <iostream>
 using namespace std;
 
@@ -48,7 +46,7 @@ void NavalUnit::setPosition(Coordinates bow, Coordinates stern)
 vector<Coordinates> NavalUnit::getGridPositions(Coordinates centerPos)
 {
 	vector<Coordinates> coords;
-	if (vertical)
+	if(vertical)
 	{
 		for(int i = 0; i < size; i++)
 		{
@@ -107,7 +105,7 @@ void NavalUnit::hit(Coordinates target)
 	{
 		if(positions[i] == target)
 		{
-			if(!hitState[i])	//non era già stato colpito
+			if(!hitState[i])	//not already hit
 			{
 				shield--;
 			}

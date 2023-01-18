@@ -1,6 +1,6 @@
 /**
- * @brief Definitions of functions of Player
- * @param name
+ * @author Angelica Zonta 2032570
+ * @brief Definition of functions of Player.h
  */
 
 #include <iostream>
@@ -17,11 +17,9 @@ using namespace std;
 Player::Player(string name)
 {
 	n = name;
-    hits = 0; 
-    win = false;
 }
 
-NavalUnit* Player::addUnit(NavalUnitType type, string name)	//piazza unità, specifico per human chiede dove
+NavalUnit* Player::addUnit(NavalUnitType type, string name)
 {
 	NavalUnit* entry;
 	switch(type)
@@ -59,7 +57,7 @@ NavalUnit* Player::findUnit(Coordinates center)
 	return nullptr;
 }
 
-void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
+void Player::play(Action action)
 {
 	switch(action.getType())
 	{
@@ -69,7 +67,7 @@ void Player::play(Action action)	//fa prossima mossa, chiama move,fire,ecc
 
             if(unit == nullptr || !action.getTarget().isValid())
             {
-                throw invalid_argument("Invalid source");
+                throw invalid_argument("Invalid source or target");
             }
             unit->action(action.getTarget());
 			break;
@@ -110,7 +108,7 @@ bool Player::hitOpponent(Coordinates target)
 vector<Coordinates> Player::scan(Coordinates center)
 {
 	vector<Coordinates> positions;
-	for(int i = (center.getX()-2); i <= (center.getX()+2); i++)
+	for(int i = (center.getX()-2); i <= (center.getX()+2); i++) //area 5x5
 	{
 		for(int j = (center.getY()-2); j <= (center.getY()+2); j++)
 		{

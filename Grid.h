@@ -1,10 +1,14 @@
-//Cassanego Giulia 2032560
+/**
+ * @author Angelica Zonta 2032570
+ * @class Grid
+ * @file Grid.h
+ * @brief This class initializes functions in order to create a grid and save her status
+ */
 
 #ifndef GRID_H
 #define GRID_H
 
 #include <iostream>
-
 #include "GridCell.h"
 
 using namespace std;
@@ -17,7 +21,8 @@ private:
 
 public:
 	Grid() {}
-	GridCell& getDefense(Coordinates pos);
+
+	GridCell& getDefense(Coordinates pos); 
 	GridCell& getAttack(Coordinates pos);
 	
 	bool isFree(Coordinates pos);	

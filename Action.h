@@ -1,15 +1,12 @@
 /**
+ * @author Giulia Cassanego 2032560
  * @class Action
- * @author Giulia Cassanego
- * @date 17/01/2023
  * @file Action.h
  * @brief This class constructs an Action object used by players in GamePlay
  */
 
 #ifndef ACTION_H
 #define ACTION_H
-
-#include <vector>
 
 #include "Coordinates.h"
 
@@ -39,8 +36,6 @@ public:
 	ActionType getType() {return type;}
 	Coordinates getSource() {return source;}
 	Coordinates getTarget() {return target;}
-	
-	
 };
 
 #endif

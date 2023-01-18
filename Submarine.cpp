@@ -1,15 +1,13 @@
 /**
- * @brief Definitions of functions of Submarine
- * @param target
+ * @author Giulia Cassanego 2032560
+ * @brief Definition of functions of Submarine.h
  */
-
 #include <iostream>
 
 #include "Submarine.h"
 #include "Player.h"
 
 using namespace std;
-
 
 void Submarine::action(Coordinates target)
 {

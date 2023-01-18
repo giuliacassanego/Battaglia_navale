@@ -1,8 +1,7 @@
 /**
- * @brief 
- * @param Definitions of functions of Coordinates
+ * @author Angelica Zonta 2032570
+ * @brief Definition of functions of Coordinates.h
  */
-
 #include "Coordinates.h"
 
 Coordinates::Coordinates(string s)

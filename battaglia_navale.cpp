@@ -1,5 +1,6 @@
 /**
- * @brief 
+ * @author Giulia Cassanego 2032560
+ * @brief Executable
  * @param argc
  * @param argv
  */
@@ -15,7 +16,8 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	if(argc != 2)
+	//check of the command line input
+    if(argc != 2)
 	{
 		cout << "error: Unspecified type of players" << endl;
 		return 0;
@@ -36,6 +38,8 @@ int main(int argc, char** argv)
 	{
 		mode = CC;
 	}
+    
+    //start of the game
 	GamePlay game(mode);
 	game.playGame();
 	

@@ -1,5 +1,10 @@
-//Cassanego Giulia
-
+/**
+ * @author Angelica Zonta 2032570
+ * @class Player
+ * @file Player.h
+ * @brief This class initializes an object player
+ */
+ 
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <iostream>
@@ -13,11 +18,9 @@ class Player
 {
 protected:
 	string n;
-    int hits; //numero dei colpi andati a segno
-    bool win;
 	vector<NavalUnit*> units;
-	vector<string> initPos;	//poppa e prua nell'insert
-	vector<string> actionCoords;	//source e target per azioni
+	vector<string> initPos;	//save bow and stern for the insert for the log.txt
+	vector<string> actionCoords; //save source and target for the action for the log.txt
 	Player *opponent;
 	Grid grid;
 
@@ -26,27 +29,30 @@ public:
 	
 	string getName() {return n;}
 	
-	NavalUnit* addUnit(NavalUnitType type, string name); //piazza unità, specifico per human chiede dove
+    //returns the pointer to the units of the player
+	NavalUnit* addUnit(NavalUnitType type, string name); 
+    //inserts the units in the grid given their bow and stern
 	void setUnitPosition(NavalUnit* unit, Coordinates bow, Coordinates stern);
 	NavalUnit* findUnit(Coordinates center);
-	virtual Action nextAction() = 0;	//human chiede, computer random
-	void play(Action action);	//fa prossima mossa, chiama move,fire,ecc
-	void move(NavalUnit* unit, Coordinates target);	//usata in play
 	
+    //make the action
+	void play(Action action);
+	
+    //virtual function
 	virtual void prepareGrid() = 0;
+    virtual Action nextAction() = 0;
 	
-	bool checkHit(Coordinates pos);//aggiorna shield
-	int getTotalShield();//tutti shield a zero=perso
-	
-    void hasHit() {hits++;}
-    int getHits() {return hits;}
+   
+	bool checkHit(Coordinates pos); //update shield
+    int getTotalShield(); //count the number of shields, if shield=0 the player has lost
+    
 	Player* checkWin();
 	Grid& getGrid() {return grid;}
 	
 	bool hitOpponent(Coordinates target);
 	void setOpponent(Player *opp) {opponent = opp;}
 	
-	vector<Coordinates> scan(Coordinates center);
+	vector<Coordinates> scan(Coordinates center); //used in Submarine::action
 	
 	string getInitPos();
 	string getActionCoords();

@@ -1,7 +1,6 @@
 /**
+ * @author Giulia Cassanego 2032560
  * @class BattleShip
- * @author Giulia Cassanego
- * @date 17/01/2023
  * @file BattleShip.h
  * @brief This class is a subclass of NavalUnit
  */
@@ -14,8 +13,10 @@
 class BattleShip : public NavalUnit
 {
 public:
-	BattleShip(string name, Player *player) : NavalUnit(name, 5, player) {}
+    BattleShip(string name, Player *player) : NavalUnit(name, 5, player) {}
 	char getSymbol() {return 'C';}
+    
+    //Implementation of the virtual function of the class player: Action fire
 	void action(Coordinates target);
 };
 

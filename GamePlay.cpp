@@ -1,5 +1,6 @@
 /**
- * @brief Definitions of functions of GamePlay
+ * @author Giulia Cassanego 2032560
+ * @brief Definition of functions of GamePlay.h
  */
 
 #include <cstdlib>
@@ -23,12 +24,14 @@ void GamePlay::playGame()
 			cout << endl << p1.getName() <<"'s grid:"<< endl<< p1.getGrid(); 
 			ComputerPlayer p2("Player2");
 			
+            //save in log file the initial position coordinates
 			logFile << "Posizioni player1\n" << p1.getInitPos() << "\n";
 			logFile << "Posizioni player2\n" << p2.getInitPos() << "\n";
 			
 			p1.setOpponent(&p2);
 			p2.setOpponent(&p1);
 			
+            //choose the beginner of the game
 			int first = start();
 			Player* active;
 			if(first == 1)
@@ -41,9 +44,9 @@ void GamePlay::playGame()
 			}
 
 			logFile << "The first action is of " << active->getName() <<  "\n";
-            int n = 0;
+            int n = 0; //counter of the number of actions executed
 			try{
-				while(n < 6)
+				while(n < 10)
 				{
 					cout << endl << "Game turn of " << active->getName() << endl;
 					Action a = active->nextAction();
@@ -53,6 +56,7 @@ void GamePlay::playGame()
 				
 					if(a.getType() != CLEAR && a.getType() != SHOW)
 					{
+                        //switch the active player
 						if(active == &p1)
 						{
 							active = &p2;
@@ -79,20 +83,22 @@ void GamePlay::playGame()
 			ComputerPlayer p2("Player2");
 			cout << p2.getName() <<"'s grid:"<< endl<< p2.getGrid(); 
 			
+            //save in log file the initial position coordinates
 			logFile << "Posizioni player1\n" << p1.getInitPos() << "\n";
 			logFile << "Posizioni player2\n" << p2.getInitPos() << "\n";
 			
 			p1.setOpponent(&p2);
 			p2.setOpponent(&p1);
 			
+            //randomly choose the beginner
 			int first = start();
 			Player* active = (first == 1 ? &p1 : &p2);
 			
 			logFile << "The first action is of " << active->getName() <<  "\n";
   
-            int n = 0;
+            int n = 0;//counter of the number of actions executed
 			try{
-				while(n < 6)
+				while(n < 10)
 				{       
 					cout << "Game turn of " << active->getName() << endl;
 					Action a = active->nextAction();
@@ -101,9 +107,11 @@ void GamePlay::playGame()
 					logFile << active->getActionCoords();
 					
 					cout << active->getName() << "'s grid: " << endl << active->getGrid();
-
+                    
+                    //switch the active player
 					active = (active == &p1 ? &p2 : &p1);
 
+                    //as said in the readme.txt file, we chose to comment the command 'AA AA', in order to make the game more clean
 					//if(a.getType() != CLEAR)
 					//{
 						n++;
@@ -126,6 +134,6 @@ void GamePlay::playGame()
 int GamePlay::start()
 {
     srand(time(NULL));
-    int n = rand()%2+1; //numero casuale da 1 a 2
+    int n = rand()%2+1; 
     return n;
 }

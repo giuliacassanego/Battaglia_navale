@@ -1,7 +1,8 @@
 /**
- * @brief Definitions of functions of GridCell
+ * @author Angelica Zonta 2032570
+ * @brief Definition of functions of GridCell.h
  */
-
+ 
 #include "GridCell.h"
 
 void GridCell::clear()
@@ -17,7 +18,7 @@ char GridCell::getSymbol()
 	if(p)
 	{
 		char c = p->getSymbol();
-		return (isHit ? tolower(c) : c);
+		return (isHit ? tolower(c) : c); //check of the hit status and return the relative symbol
 	}
 	if(isSonar)
 	{

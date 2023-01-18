@@ -1,5 +1,6 @@
 /**
- * @brief Definitions of functions of ComputerPlayer
+ * @author Angelica Zonta 2032570
+ * @brief Definition of functions of ComputerPlayer.h
  */
 
 #include "ComputerPlayer.h"
@@ -13,10 +14,12 @@ Action ComputerPlayer::nextAction()
 {
     Action a;
     
-/*    srand(time(NULL));
+    //as said in the readme.txt file, we chose to comment the command 'AA AA', in order to make the game more clean
+    
+/*  srand(time(NULL));
     int n = rand()%2+1;
 
-    if(n==1) //eseguo comando AA AA
+    if(n==1) 
     {
         cout << "command AA AA" << endl;
         a = Action(CLEAR);
@@ -56,7 +59,7 @@ Action ComputerPlayer::nextAction()
     return a;
 }
 
-Coordinates ComputerPlayer::randomChosePos() //metodo per target
+Coordinates ComputerPlayer::randomChosePos()
 {
     srand(time(NULL));
     int num = rand()%12+1; 
@@ -65,8 +68,8 @@ Coordinates ComputerPlayer::randomChosePos() //metodo per target
     char pos;
     while(correctLett != true)
     {
-        pos =65+rand()%(78-64); //scelgo una lettera casulamente con codice ascii: da A a N;
-        if(pos != 74 && pos != 75)//controllo che non escano le lettere K e J
+        pos =65+rand()%(78-64); //random chose of a letter with the ascii code from A to N;
+        if(pos != 74 && pos != 75)//check if the letter is not 'K' or 'J' which are not in the grid table 
         {
             correctLett=true;
         }
@@ -84,9 +87,8 @@ int ComputerPlayer::chooseDirection()
     return n;
 }
 
-Coordinates ComputerPlayer::findStern(NavalUnit* n, Coordinates bow) //metodo per trovare la prua
+Coordinates ComputerPlayer::findStern(NavalUnit* n, Coordinates bow)
 {
-    
     int x = bow.getX();
     int y= bow.getY();
     int dir = chooseDirection();

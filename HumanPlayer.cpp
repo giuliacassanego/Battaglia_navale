@@ -1,7 +1,7 @@
 /**
- * @brief Definitions of functions of HumanPlayer
+ * @author Angelica Zonta 2032570
+ * @brief Definition of functions of HumanPlayer.h
  */
-
 #include "HumanPlayer.h"
 
 Action HumanPlayer::nextAction()
@@ -13,6 +13,7 @@ Action HumanPlayer::nextAction()
     Coordinates target;
 	
     bool correct = false;
+    //reading and parsing the input's command
     while(correct != true)
     {
 		cout << "Insert XYOrigin XYTarget" << endl;
@@ -24,7 +25,6 @@ Action HumanPlayer::nextAction()
 			cout << "Command AA AA" << endl;
 			a = Action(CLEAR);
 			actionCoords.push_back("AA AA");
-			cout << "size actionCoords " << actionCoords.size() << endl;
 			correct = true;
 		}
 		else if(command1 == "XX" && command2 == "XX")
@@ -32,7 +32,6 @@ Action HumanPlayer::nextAction()
 			cout << "Command XX XX" << endl;
 			a = Action(SHOW);
 			actionCoords.push_back("XX XX");
-			cout << "size actionCoords " << actionCoords.size() << endl;
 			correct = true;
 		}
 		else
@@ -60,7 +59,13 @@ Action HumanPlayer::nextAction()
                         actionCoords.push_back(Coordinates::createString(a.getSource(), a.getTarget()));
                         correct = true;
                     }
+                    else{
+                        cout << "XYTarget already occupied" << endl;
+                    }
 				}
+                else{
+                    cout << "XYOrigin not valid" << endl;
+                }
 			}
 			catch(invalid_argument e){cout << e.what() << endl;}
 		}

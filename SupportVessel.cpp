@@ -1,8 +1,7 @@
 /**
- * @brief Definitions of functions of SupportVessel
- * @param target
+ * @author Giulia Cassanego 2032560
+ * @brief Definition of functions of SupportVessel.h
  */
-
 #include <iostream>
 
 #include "SupportVessel.h"
@@ -37,8 +36,8 @@ void SupportVessel::action(Coordinates target)
 					{
 						unit->repair();
 				
-						player->getGrid().clear(unit);	//tolgo unità con vecchi valori
-						player->getGrid().insert(unit);	//la reinserisco con valori aggiornati			
+						player->getGrid().clear(unit);	//remove the unit with his old values
+						player->getGrid().insert(unit);	//reinsert the unit with the updated values	
 					}
 				}
 			}

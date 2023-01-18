@@ -1,8 +1,7 @@
 /**
- * @brief Definitions of functions of Grid
- * @param pos
+ * @author Angelica Zonta 2032570
+ * @brief Definition of functions of Grid.h
  */
-
 #include <ostream>
 #include <stdio.h>
 #include <cctype>
@@ -61,7 +60,7 @@ void Grid::clear(NavalUnit *unit)
 	}
 }
 
-void Grid::deleteSonar()	//cerco Y e riporto a carattere iniziale
+void Grid::deleteSonar()	//find 'Y' and set it to the previous symbol
 {
 	for(int i = 0; i < 12; i++)
 	{

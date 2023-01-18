@@ -1,6 +1,6 @@
 /**
- * @author Giulia Cassanego
- * @brief Definitions of functions of BattleShip
+ * @author Giulia Cassanego 2032560
+ * @brief Definition of the functions of BattleShip.h
  */
 
 #include <iostream>
@@ -10,12 +10,13 @@
 
 using namespace std;
 
+
 void BattleShip::action(Coordinates target)
 {
 	cout << "Battleship action" << endl;
 	bool hit = player->hitOpponent(target);
     
-	cout << "hit: " << hit << endl;
+	cout << "hit: " << hit << endl; //0=not hit, 1 = hit 
 	if(hit)
 	{
 		player->getGrid().getAttack(target).setHit();
