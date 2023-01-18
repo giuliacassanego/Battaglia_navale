@@ -20,7 +20,7 @@ private:
 public:
 	GridCell() {clear();}
     
-	void setHit() {isHit = true; isMiss = false;}
+	void setHit() {isHit = true; isMiss = false; isSonar = false;}
 	void setMiss() {isMiss = true; isHit = false;}
 	void setSonar() {isSonar = true;}
 	void resetSonar() {isSonar = false;}
