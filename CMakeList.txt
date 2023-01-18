@@ -1,33 +1,15 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
+set(CMAKE_CX_STANDARD 11)
+project(Battleship)
 
-set(PROJECT_NAME Battleship)
-project (${Battleship} VERSION 1.0)
+include_directories(fileh)
 
-add_library(Action.cpp)
-add_library(Action.h)
-add_library(BattleShip.cpp)
-add_library(BattleShip.h)
-add_library(ComputerPlayer.cpp)
-add_library(ComputerPlayer.h)
-add_library(Coordinates.cpp)
-add_library(Coordinates.h)
-add_library(GamePlay.cpp)
-add_library(GamePlay.h)
-add_library(Grid.cpp)
-add_library(Grid.h)
-add_library(GridCell.cpp)
-add_library(GridCell.h)
-add_library(HumanPlayer.cpp)
-add_library(HumanPlayer.h)
-add_library(NavalUnit.cpp)
-add_library(NavalUnit.h)
-add_library(Player.cpp)
-add_library(Player.h)
-add_library(Submarine.cpp)
-add_library(Submarine.h)
-add_library(SupportVessel.cpp)
-add_library(SupportVessel.h)
+add_library(Lib_Battleship src/Battleship.cpp src/ComputerPlayer.cpp src/GamePlay.cpp src/Grid.cpp src/GridCell.cpp src/HumanPlayer.cpp
+					src/NavalUnit.cpp src/Player.cpp src/Submarine.cpp src/SupporVessel.cpp)
 
-add_executable(main.cpp)
+add_executable(battaglia_navale main/battaglia_navale.cpp)
 
-target_link_libraries(${PROJECT_NAME} main Action BattleShip ComputerPlayer Coordinates GamePlay Grid GridCell HumanPlayer NavalUnit Player Submarine SupportVessel)
+
+
+
+target_link_libraries(battaglia_navale Lib_Battleship)
